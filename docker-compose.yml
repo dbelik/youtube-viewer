@@ -1,0 +1,33 @@
+version: "3.7"
+
+networks:
+  backend:
+
+services:
+  &backend php:
+    hostname: *backend
+    container_name: *backend
+    build: ./server
+    networks:
+      - backend
+    environment:
+      FPM_USER: 'dev'
+      FPM_GROUP: 'dev'
+      FPM_PORT: ${PHP_FPM_PORT}
+    volumes:
+      - ./server:/var/www/youtube-viewer
+      - ./server/vendor:/var/www/youtube-viewer/vendor
+
+  &web-server nginx:
+    container_name: *web-server
+    hostname: *web-server
+    image: nginx:1.19
+    ports:
+      - ${NGINX_PORT}:80
+    networks:
+      - backend
+    volumes:
+      - ./server:/var/www/youtube-viewer
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on: 
+      - *backend
