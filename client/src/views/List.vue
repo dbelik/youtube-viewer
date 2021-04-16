@@ -4,7 +4,11 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
-    
+    created() {
+        axios.get('localhost:8080');
+    }
 }
 </script>

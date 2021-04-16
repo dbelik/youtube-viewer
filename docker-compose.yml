@@ -38,3 +38,6 @@ services:
     container_name: *frontend
     hostname: *frontend
     build: ./client
+    command: npm run server
+    volumes:
+      - ./client
