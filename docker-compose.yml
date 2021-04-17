@@ -9,6 +9,7 @@ services:
     hostname: *backend
     container_name: *backend
     build: ./server
+    command: composer install --ignore-platform-reqs
     networks:
       - backend
     environment:
@@ -38,6 +39,10 @@ services:
     container_name: *frontend
     hostname: *frontend
     build: ./client
-    command: npm run server
+    command: npm run serve
+    ports:
+      - ${FRONT_PORT}:8080
+    networks:
+      - frontend
     volumes:
       - ./client

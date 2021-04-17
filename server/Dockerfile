@@ -13,5 +13,3 @@ RUN apt-get update && \
 
 COPY composer.json composer.json
 COPY composer.lock composer.lock
-
-# CMD bash -c "composer install"
