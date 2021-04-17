@@ -86,21 +86,25 @@ export default {
       this.videos.push("YPgkSH2050k");
       this.loadedCount += 3;
     },
+    loadChannel(id) {
+      this.videos = [];
+      this.profilePicture =
+        "https://yt3.ggpht.com/ytc/AAUvwnhdHjn1tScGwjN4HOM8MnsSc7uzo54at0qKweQX=s88-c-k-c0x00ffffff-no-rj";
+      this.channelName = "lol Valley";
+      this.subscribersCount = "9880";
+      this.channelId = id;
+      this.loadMoreVideos();
+    },
   },
   watch: {
     $route() {
-      this.loadMoreVideos();
+      this.loadChannel(this.$route.query.channelId);
     },
   },
   async created() {
     // const data = await axios.get("http://localhost:8080/list.php");
     // this.videos = data.data.ids;
-    this.loadMoreVideos();
-    this.profilePicture =
-      "https://yt3.ggpht.com/ytc/AAUvwnhdHjn1tScGwjN4HOM8MnsSc7uzo54at0qKweQX=s88-c-k-c0x00ffffff-no-rj";
-    this.channelName = "lol Valley";
-    this.subscribersCount = "9880";
-    this.channelId = "UCfRKvxo-2oSKNptUqbciuIw";
+    this.loadChannel("UCfRKvxo-2oSKNptUqbciuIw");
   },
 };
 </script>
