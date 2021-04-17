@@ -4,7 +4,9 @@
       <div
         class="content-container d-flex justify-content-between align-items-center row py-3"
       >
-        <div class="d-flex align-items-center justify-content-center justify-content-sm-start mb-3 mb-sm-0 col-12 col-sm-6">
+        <div
+          class="d-flex align-items-center justify-content-center justify-content-sm-start mb-3 mb-sm-0 col-12 col-sm-6"
+        >
           <img
             class="rounded-circle"
             height="80"
@@ -21,6 +23,7 @@
         <div class="col-12 col-sm-6 text-center text-sm-right">
           <a
             :href="`https://www.youtube.com/channel/${channelId}`"
+            target="_blank"
             class="primary-button"
             >Go to Channel</a
           >
@@ -28,19 +31,28 @@
       </div>
     </div>
     <div class="bg-content h-100">
-      <div
-        class="content-container py-3 d-flex align-items-center justify-content-start row"
-      >
+      <div class="content-container py-3">
         <div
-          v-for="video in videos"
-          :key="video"
-          class="col-12 col-sm-6 col-md-4 col-lg-3 px-2"
+          class="row w-100 h-100 align-items-center justify-content-start d-flex"
         >
-          <iframe
-            class="w-100"
-            :src="`https://www.youtube.com/embed/${video}`"
+          <div
+            v-for="video in videos"
+            :key="video"
+            class="col-12 col-sm-6 col-md-4 col-lg-3 px-2"
           >
-          </iframe>
+            <iframe
+              class="w-100"
+              :src="`https://www.youtube.com/embed/${video}`"
+            >
+            </iframe>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+          <button class="arrow-button arrow-button-down">
+            <svg viewBox="0 0 24 24" style="width: 100%; height: 100%">
+              <path fill="red" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>

@@ -6,6 +6,9 @@
   --bg-header: #f9f9f9;
   --bg-content: #f1f1f1;
   --bg-primary: #cc0000;
+  --bg-default: #ffffff;
+  
+  --bg-general-1: #777777;
 
   --color-in-primary: #ffffff;
 
@@ -14,6 +17,8 @@
 
   --font-size-additional: 0.9rem;
   --font-size-channel-title: 1.7rem;
+
+  --transition-fast: 0.1s;
 }
 
 /* Tag overloads */
@@ -59,6 +64,29 @@
   color: var(--color-in-primary);
   padding: 0.5rem 1rem;
   display: inline-block;
+}
+
+.arrow-button {
+  border-radius: 50%;
+  background-color: var(--bg-default);
+  border: none;
+  transition: var(--transition-fast);
+  width: 3rem;
+  padding: .4rem;
+}
+
+.arrow-button path {
+  fill: var(--bg-general-1);
+}
+
+.arrow-button:hover,
+.arrow-button:focus {
+  background-color: var(--bg-content);
+}
+
+.arrow-button.arrow-button-down {
+  transform: rotate(90deg);
+  box-shadow: 4px 0px 4px rgba(0, 0, 0, 30%), 0 0 4px rgba(0, 0, 0, 20%);
 }
 
 .primary-button:hover,
