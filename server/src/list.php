@@ -14,18 +14,26 @@
     // Etc
     $channelId = 'UCqecwG03N62mRGzbrVkz3LQ';
 
-    // Construct full url that will be used to query videos.
-    $url = "$base/search?part=snippet&channelId=$channelId&maxResult=$max_videos&key=$key";
+    // Construct full urls that will be used to query data.
+    $searchUrl = "$base/search?part=snippet,id&fields=items%2Fid%2FvideoId&order=date&channelId=$channelId&maxResult=$max_videos&key=$key";
+    $channelUrl = "$base/channels?part=snippet&id=$channelId&key=$key";
 
     // Get videos
-    $content = json_decode(file_get_contents($url));
+    $videos = json_decode(file_get_contents($searchUrl));
+    $channel = json_decode(file_get_contents($channelUrl));
 
     // Store video ids
-    $ids = [];
+    $res = ["ids" => [], "channel" => []];
 
-    foreach ($content->items as $video) {
-        array_push($ids, $video->id->videoId);
+    foreach ($videos->items as $video) {
+        array_push($res["ids"], $video->id->videoId);
     }
 
+    $res["channel"] = $channel;
+
     // Output them
-    echo json_encode($ids);
+    header("Content-Type: application/json");
+    echo json_encode($res);
+
+    echo "<pre>";
+    print_r($channel);

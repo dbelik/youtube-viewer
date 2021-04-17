@@ -1,0 +1,75 @@
+/* Declare variables */
+:root {
+  font-size: 16px;
+
+  /* Variables */
+  --bg-header: #f9f9f9;
+  --bg-content: #f1f1f1;
+  --bg-primary: #cc0000;
+
+  --color-in-primary: #ffffff;
+
+  --text-general: #030303;
+  --text-additional: #606060;
+
+  --font-size-additional: 0.9rem;
+  --font-size-channel-title: 1.7rem;
+}
+
+/* Tag overloads */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Utility classes */
+.content-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 0px 2rem;
+}
+
+/* Background colors */
+.bg-header {
+  background-color: var(--bg-header);
+}
+.bg-content {
+  background-color: var(--bg-content);
+}
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+/* Heights */
+.h-100vh {
+  height: 100vh;
+}
+.mh-100vh {
+  min-height: 100vh;
+}
+
+/* Font sizes */
+.font-size-additional {
+  font-size: var(--font-size-additional);
+}
+
+/* Buttons */
+.primary-button {
+  background-color: var(--bg-primary);
+  color: var(--color-in-primary);
+  padding: .5rem 1rem;
+  display: inline-block;
+}
+
+.primary-button:hover, .primary-button:focus {
+  color: var(--color-in-primary);
+  background-color: var(--bg-primary);
+  text-decoration: none;
+}
+
+/* Misc */
+.channel-title {
+  font-size: var(--font-size-channel-title);
+  font-weight: normal;
+  margin: 0;
+}
