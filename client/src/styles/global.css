@@ -57,11 +57,12 @@
 .primary-button {
   background-color: var(--bg-primary);
   color: var(--color-in-primary);
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   display: inline-block;
 }
 
-.primary-button:hover, .primary-button:focus {
+.primary-button:hover,
+.primary-button:focus {
   color: var(--color-in-primary);
   background-color: var(--bg-primary);
   text-decoration: none;
@@ -72,4 +73,11 @@
   font-size: var(--font-size-channel-title);
   font-weight: normal;
   margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .content-container {
+    padding: 0;
+  }
 }

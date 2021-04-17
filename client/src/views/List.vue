@@ -2,9 +2,9 @@
   <div class="d-flex flex-column mh-100vh h-100vh">
     <div class="bg-header height-auto">
       <div
-        class="content-container d-flex justify-content-between align-items-center"
+        class="content-container d-flex justify-content-between align-items-center row py-3"
       >
-        <div class="d-flex align-items-center py-3">
+        <div class="d-flex align-items-center justify-content-center justify-content-sm-start mb-3 mb-sm-0 col-12 col-sm-6">
           <img
             class="rounded-circle"
             height="80"
@@ -18,7 +18,7 @@
             </p>
           </div>
         </div>
-        <div>
+        <div class="col-12 col-sm-6 text-center text-sm-right">
           <a
             :href="`https://www.youtube.com/channel/${channelId}`"
             class="primary-button"
@@ -34,11 +34,10 @@
         <div
           v-for="video in videos"
           :key="video"
-          class="col-12 col-md-6 col-lg-4 px-2"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 px-2"
         >
           <iframe
             class="w-100"
-            height="315"
             :src="`https://www.youtube.com/embed/${video}`"
           >
           </iframe>
