@@ -1,6 +1,6 @@
 <template>
   <SearchNavbar />
-  <main class="pt-5 mh-100vh h-100vh">
+  <main class="pt-5 mh-100vh h-100 bg-content">
     <router-view />
   </main>
 </template>

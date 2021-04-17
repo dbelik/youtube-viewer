@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-content h-100">
+    <div class="h-100">
       <div class="content-container py-3">
         <div
           class="row w-100 h-100 align-items-center justify-content-start d-flex"
@@ -49,6 +49,7 @@
         </div>
         <div class="d-flex justify-content-center mt-2">
           <button
+            v-if="moreVideos"
             v-on:click="loadMoreVideos"
             class="arrow-button arrow-button-down"
           >
@@ -74,19 +75,27 @@ export default {
       channelId: "",
       profilePicture: "",
       subscribersCount: 0,
+      moreVideos: true,
+      loadedCount: 0,
     };
   },
   methods: {
     loadMoreVideos() {
-      alert("here");
+      this.videos.push("eipEPh6SpU8");
+      this.videos.push("YPgkSH2050k");
+      this.videos.push("YPgkSH2050k");
+      this.loadedCount += 3;
+    },
+  },
+  watch: {
+    $route() {
+      this.loadMoreVideos();
     },
   },
   async created() {
     // const data = await axios.get("http://localhost:8080/list.php");
     // this.videos = data.data.ids;
-    this.videos.push("eipEPh6SpU8");
-    this.videos.push("YPgkSH2050k");
-    this.videos.push("YPgkSH2050k");
+    this.loadMoreVideos();
     this.profilePicture =
       "https://yt3.ggpht.com/ytc/AAUvwnhdHjn1tScGwjN4HOM8MnsSc7uzo54at0qKweQX=s88-c-k-c0x00ffffff-no-rj";
     this.channelName = "lol Valley";
