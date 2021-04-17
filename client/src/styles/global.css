@@ -3,21 +3,31 @@
   font-size: 16px;
 
   /* Variables */
+  /* Background colors */
   --bg-header: #f9f9f9;
   --bg-content: #f1f1f1;
   --bg-primary: #cc0000;
   --bg-default: #ffffff;
-  
+  --bg-navbar: rgba(255, 255, 255, 0.96);
+
   --bg-general-1: #777777;
+  --bg-button-1: #f8f8f8;
 
-  --color-in-primary: #ffffff;
-
+  /* Text colors */
   --text-general: #030303;
   --text-additional: #606060;
 
+  /* Border colors */
+  --border-color-button-1: #d7d7d7;
+
+  /* Misc colors */
+  --color-in-primary: #ffffff;
+
+  /* Font sizes */
   --font-size-additional: 0.9rem;
   --font-size-channel-title: 1.7rem;
 
+  /* Transitions */
   --transition-fast: 0.1s;
 }
 
@@ -26,6 +36,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a:hover, button:hover, input:hover,
+a:focus, button:focus, input:focus {
+  outline: none;
+}
+
+a, button {
+  cursor: pointer;
 }
 
 /* Utility classes */
@@ -45,12 +64,29 @@
 .bg-primary {
   background-color: var(--bg-primary);
 }
-/* Heights */
+.bg-navbar {
+  background-color: var(--bg-navbar);
+}
+
+.bg-button-1 {
+  background-color: var(--bg-button-1);
+}
+
+/* Borders */
+.border-color-1 {
+  border-color: var(--border-color-button-1);
+}
+
+/* Sizes */
 .h-100vh {
   height: 100vh;
 }
 .mh-100vh {
   min-height: 100vh;
+}
+
+.w-100vw {
+  width: 100vw;
 }
 
 /* Font sizes */
@@ -72,7 +108,7 @@
   border: none;
   transition: var(--transition-fast);
   width: 3rem;
-  padding: .4rem;
+  padding: 0.4rem;
 }
 
 .arrow-button path {

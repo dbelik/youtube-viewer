@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column mh-100vh h-100vh">
+  <div class="d-flex flex-column h-100">
     <div class="bg-header height-auto">
       <div
         class="content-container d-flex justify-content-between align-items-center row py-3"
@@ -48,9 +48,15 @@
           </div>
         </div>
         <div class="d-flex justify-content-center mt-2">
-          <button class="arrow-button arrow-button-down">
+          <button
+            v-on:click="loadMoreVideos"
+            class="arrow-button arrow-button-down"
+          >
             <svg viewBox="0 0 24 24" style="width: 100%; height: 100%">
-              <path fill="red" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+              <path
+                fill="red"
+                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+              ></path>
             </svg>
           </button>
         </div>
@@ -69,6 +75,11 @@ export default {
       profilePicture: "",
       subscribersCount: 0,
     };
+  },
+  methods: {
+    loadMoreVideos() {
+      alert("here");
+    },
   },
   async created() {
     // const data = await axios.get("http://localhost:8080/list.php");
