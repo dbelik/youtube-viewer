@@ -23,7 +23,7 @@
         
         // Get channel info
         $channel = json_decode(file_get_contents($channelUrl));
-        if (isset($videos->error)) {
+        if (!(array)$channel) {
             $res['error'] = "Couldn't get anything with this channel id";
         } else {
             $res["channel"] = $channel;

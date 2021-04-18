@@ -6,17 +6,14 @@
         class="content-container d-flex justify-content-center align-items-center row py-3 h-100"
       >
         <p class="m-0">
-          You can view last videos from any channel. In the searchbar type
-          channel id.
+          {{ errorMessage }}
         </p>
       </div>
       <div
         v-else-if="loading"
         class="content-container d-flex justify-content-center align-items-center row py-3 h-100"
       >
-        <p class="m-0">
-          Please wait, it's loading.
-        </p>
+        <p class="m-0">Please wait, it's loading.</p>
       </div>
       <div
         v-else
@@ -96,7 +93,7 @@ export default {
       subscribersCount: 0,
       moreVideos: false,
       errorMessage: "",
-      loading: false
+      loading: false,
     };
   },
   computed: {
@@ -106,8 +103,10 @@ export default {
   },
   methods: {
     async loadMoreVideos() {
-      const data = await axios.get(`http://localhost:8080/list.php?channelId=${this.channelId}`);
-      
+      const data = await axios.get(
+        `http://localhost:8080/list.php?channelId=${this.channelId}`
+      );
+
       if (data.data.error) {
         this.errorMessage = data.data.error;
       } else {
@@ -117,7 +116,9 @@ export default {
       }
     },
     async loadChannel() {
-      const data = await axios.get(`http://localhost:8080/channelInfo.php?channelId=${this.channelId}`);
+      const data = await axios.get(
+        `http://localhost:8080/channelInfo.php?channelId=${this.channelId}`
+      );
 
       if (data.data.error) {
         this.errorMessage = data.data.error;
@@ -130,22 +131,30 @@ export default {
 
       this.videos = [];
     },
+    prepareForRequest() {
+      this.errorMessage = "";
+      this.channelId = this.$route.query.channelId || "";
+      this.videos = [];
+    },
     async loadData() {
-      this.loading = true;
-      await this.loadChannel();
-      await this.loadMoreVideos();
-      this.loading = false;
+      this.prepareForRequest();
+
+      if (this.channelId) {
+        this.loading = true;
+        await this.loadChannel();
+        await this.loadMoreVideos();
+        this.loading = false;
+      } else {
+        this.errorMessage = "You should specify channel id in search bar";
+      }
     },
   },
   watch: {
     async $route() {
-      this.channelId = this.$route.query.channelId || "";
-      this.videos = [];
       await this.loadData();
     },
   },
   async created() {
-    this.channelId = this.$route.query.channelId || "";
     await this.loadData();
   },
 };

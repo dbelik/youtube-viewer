@@ -26,7 +26,7 @@
         // Get videos
         $videos = json_decode(file_get_contents($searchUrl));
 
-        if (isset($videos->error)) {
+        if (!(array)$videos) {
             $res['error'] = "Couldn't get anything with this channel id";
         } else {
             foreach ($videos->items as $video) {
