@@ -41,12 +41,17 @@
   box-sizing: border-box;
 }
 
-a:hover, button:hover, input:hover,
-a:focus, button:focus, input:focus {
+a:hover,
+button:hover,
+input:hover,
+a:focus,
+button:focus,
+input:focus {
   outline: none;
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
 }
 
@@ -94,6 +99,16 @@ a, button {
 
 .h-navbar {
   height: var(--height-navbar);
+}
+
+@media (max-width: 575px) {
+  :root {
+    --height-navbar: 170px;
+  }
+
+  .h-navbar {
+    height: var(--height-navbar);
+  }
 }
 
 /* Font sizes */

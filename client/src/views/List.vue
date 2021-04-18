@@ -48,7 +48,7 @@
     <div class="h-100">
       <div v-if="correntRequest" class="content-container py-3">
         <div
-          class="row w-100 h-100 align-items-center justify-content-start d-flex"
+          class="row w-100 h-100 align-items-center justify-content-start d-flex m-0"
         >
           <div
             v-for="video in videos"
