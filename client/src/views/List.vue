@@ -1,7 +1,17 @@
 <template>
   <div class="d-flex flex-column h-100">
-    <div class="bg-header height-auto">
+    <div class="bg-header h-navbar">
       <div
+        v-if="!correntChannelId"
+        class="content-container d-flex justify-content-center align-items-center row py-3 h-100"
+      >
+        <p class="m-0">
+          You can view last videos from any channel. In the searchbar type
+          channel id.
+        </p>
+      </div>
+      <div
+        v-else
         class="content-container d-flex justify-content-between align-items-center row py-3"
       >
         <div
@@ -13,8 +23,8 @@
             :src="profilePicture"
             alt="Profile picture"
           />
-          <div class="ml-4">
-            <h3 class="channel-title">{{ channelName }}</h3>
+          <div class="ml-4 w-100">
+            <h3 class="channel-title text-truncate">{{ channelName }}</h3>
             <p class="font-size-additional">
               {{ subscribersCount }} subscribers
             </p>
@@ -31,7 +41,7 @@
       </div>
     </div>
     <div class="h-100">
-      <div class="content-container py-3">
+      <div v-if="correntChannelId" class="content-container py-3">
         <div
           class="row w-100 h-100 align-items-center justify-content-start d-flex"
         >
@@ -77,7 +87,13 @@ export default {
       subscribersCount: 0,
       moreVideos: true,
       loadedCount: 0,
+      correntId: true
     };
+  },
+  computed: {
+    correntChannelId() {
+      return this.correntId;
+    },
   },
   methods: {
     loadMoreVideos() {
@@ -87,24 +103,26 @@ export default {
       this.loadedCount += 3;
     },
     loadChannel(id) {
+      // const data = await axios.get("http://localhost:8080/list.php");
+      // this.videos = data.data.ids;
       this.videos = [];
       this.profilePicture =
         "https://yt3.ggpht.com/ytc/AAUvwnhdHjn1tScGwjN4HOM8MnsSc7uzo54at0qKweQX=s88-c-k-c0x00ffffff-no-rj";
       this.channelName = "lol Valley";
       this.subscribersCount = "9880";
-      this.channelId = id;
+      this.channelId = id || "";
       this.loadMoreVideos();
     },
   },
   watch: {
     $route() {
+      this.correntId = false;
       this.loadChannel(this.$route.query.channelId);
     },
   },
   async created() {
-    // const data = await axios.get("http://localhost:8080/list.php");
-    // this.videos = data.data.ids;
-    this.loadChannel("UCfRKvxo-2oSKNptUqbciuIw");
+    this.loadChannel(this.$route.query.channelId);
+    this.correntId = true;
   },
 };
 </script>
