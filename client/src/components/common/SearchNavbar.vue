@@ -17,8 +17,5 @@ export default {
       channelId: "",
     };
   },
-  async created() {
-    this.channelId = this.$route.query.channelId;
-  },
 };
 </script>

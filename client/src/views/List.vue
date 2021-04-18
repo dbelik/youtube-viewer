@@ -2,12 +2,20 @@
   <div class="d-flex flex-column h-100">
     <div class="bg-header h-navbar">
       <div
-        v-if="!correntChannelId"
+        v-if="!correntRequest"
         class="content-container d-flex justify-content-center align-items-center row py-3 h-100"
       >
         <p class="m-0">
           You can view last videos from any channel. In the searchbar type
           channel id.
+        </p>
+      </div>
+      <div
+        v-else-if="loading"
+        class="content-container d-flex justify-content-center align-items-center row py-3 h-100"
+      >
+        <p class="m-0">
+          Please wait, it's loading.
         </p>
       </div>
       <div
@@ -41,7 +49,7 @@
       </div>
     </div>
     <div class="h-100">
-      <div v-if="correntChannelId" class="content-container py-3">
+      <div v-if="correntRequest" class="content-container py-3">
         <div
           class="row w-100 h-100 align-items-center justify-content-start d-flex"
         >
@@ -76,7 +84,8 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -85,47 +94,59 @@ export default {
       channelId: "",
       profilePicture: "",
       subscribersCount: 0,
-      moreVideos: true,
-      loadedCount: 0,
-      correntId: true,
+      moreVideos: false,
+      errorMessage: "",
+      loading: false
     };
   },
   computed: {
-    correntChannelId() {
-      return this.correntId;
+    correntRequest() {
+      return this.errorMessage === "";
     },
   },
   methods: {
-    loadMoreVideos() {
-      this.videos.push("eipEPh6SpU8");
-      this.videos.push("YPgkSH2050k");
-      this.videos.push("YPgkSH2050k");
-      this.loadedCount += 3;
+    async loadMoreVideos() {
+      const data = await axios.get(`http://localhost:8080/list.php?channelId=${this.channelId}`);
+      
+      if (data.data.error) {
+        this.errorMessage = data.data.error;
+      } else {
+        data.data.ids.forEach((id) => {
+          if (id) this.videos.push(id);
+        });
+      }
     },
-    loadChannel() {
-      // const data = await axios.get("http://localhost:8080/channelInfo.php");
+    async loadChannel() {
+      const data = await axios.get(`http://localhost:8080/channelInfo.php?channelId=${this.channelId}`);
+
+      if (data.data.error) {
+        this.errorMessage = data.data.error;
+      } else {
+        const channel = data.data.channel.items[0];
+        this.profilePicture = channel.snippet.thumbnails.default.url;
+        this.channelName = channel.snippet.title;
+        this.subscribersCount = channel.statistics.subscriberCount;
+      }
+
       this.videos = [];
-      this.profilePicture =
-        "https://yt3.ggpht.com/ytc/AAUvwnhdHjn1tScGwjN4HOM8MnsSc7uzo54at0qKweQX=s88-c-k-c0x00ffffff-no-rj";
-      this.channelName = "lol Valley";
-      this.subscribersCount = "9880";
     },
-    loadData() {
-      this.loadChannel();
-      this.loadMoreVideos();
+    async loadData() {
+      this.loading = true;
+      await this.loadChannel();
+      await this.loadMoreVideos();
+      this.loading = false;
     },
   },
   watch: {
-    $route() {
+    async $route() {
       this.channelId = this.$route.query.channelId || "";
-      this.correntId = false;
-      this.loadMoreVideos();
+      this.videos = [];
+      await this.loadData();
     },
   },
   async created() {
     this.channelId = this.$route.query.channelId || "";
-    this.loadData();
-    this.correntId = true;
+    await this.loadData();
   },
 };
 </script>
