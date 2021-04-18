@@ -87,7 +87,7 @@ export default {
       subscribersCount: 0,
       moreVideos: true,
       loadedCount: 0,
-      correntId: true
+      correntId: true,
     };
   },
   computed: {
@@ -102,26 +102,29 @@ export default {
       this.videos.push("YPgkSH2050k");
       this.loadedCount += 3;
     },
-    loadChannel(id) {
-      // const data = await axios.get("http://localhost:8080/list.php");
-      // this.videos = data.data.ids;
+    loadChannel() {
+      // const data = await axios.get("http://localhost:8080/channelInfo.php");
       this.videos = [];
       this.profilePicture =
         "https://yt3.ggpht.com/ytc/AAUvwnhdHjn1tScGwjN4HOM8MnsSc7uzo54at0qKweQX=s88-c-k-c0x00ffffff-no-rj";
       this.channelName = "lol Valley";
       this.subscribersCount = "9880";
-      this.channelId = id || "";
+    },
+    loadData() {
+      this.loadChannel();
       this.loadMoreVideos();
     },
   },
   watch: {
     $route() {
+      this.channelId = this.$route.query.channelId || "";
       this.correntId = false;
-      this.loadChannel(this.$route.query.channelId);
+      this.loadMoreVideos();
     },
   },
   async created() {
-    this.loadChannel(this.$route.query.channelId);
+    this.channelId = this.$route.query.channelId || "";
+    this.loadData();
     this.correntId = true;
   },
 };
