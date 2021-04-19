@@ -151,7 +151,7 @@ export default {
   },
   watch: {
     async $route() {
-      await this.loadData();
+        await this.loadData();
     },
   },
   async created() {
