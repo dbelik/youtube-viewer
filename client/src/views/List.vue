@@ -58,6 +58,7 @@
             <iframe
               class="w-100"
               :src="`https://www.youtube.com/embed/${video}`"
+              allow="fullscreen;"
             >
             </iframe>
           </div>
