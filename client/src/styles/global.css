@@ -29,9 +29,6 @@
 
   /* Transitions */
   --transition-fast: 0.1s;
-
-  /* Sizes */
-  --height-navbar: 112px;
 }
 
 /* Tag overloads */
@@ -95,20 +92,6 @@ button {
 
 .w-100vw {
   width: 100vw;
-}
-
-.h-navbar {
-  height: var(--height-navbar);
-}
-
-@media (max-width: 575px) {
-  :root {
-    --height-navbar: 170px;
-  }
-
-  .h-navbar {
-    height: var(--height-navbar);
-  }
 }
 
 /* Font sizes */

@@ -21,9 +21,9 @@
         $max_videos = $_ENV['MAX_VIDEOS'];
 
         // Construct full urls that will be used to query data.
-        $searchUrl = "$base/search?part=snippet,id&fields=items%2Fid%2FvideoId&order=date&channelId=$channelId&maxResult=$max_videos&key=$key";
+        $searchUrl = "$base/search?part=snippet,id&fields=items%2Fid%2FvideoId,items%2Fsnippet%2Fdescription&order=date&channelId=$channelId&maxResult=$max_videos&key=$key";
 
-        $res['ids'] = [];
+        $res['videos'] = [];
 
         // Get videos
         $videos = json_decode(file_get_contents($searchUrl));
@@ -32,7 +32,8 @@
             $res['error'] = "Couldn't get anything with this channel id";
         } else {
             foreach ($videos->items as $video) {
-                array_push($res['ids'], $video->id->videoId);
+                $videoData = ['id' => $video->id->videoId, 'description' => $video->snippet->description];
+                array_push($res['videos'], $videoData);
             }
         }
     } else {
