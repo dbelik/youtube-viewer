@@ -3,6 +3,8 @@
     include __DIR__.'/../vendor/autoload.php';
     include 'common.php';
 
+    suppressErrors();
+
     // Store video ids
     $res = [];
 
@@ -20,13 +22,13 @@
 
         // Construct full urls that will be used to query data.
         $channelUrl = "$base/channels?part=snippet,statistics&id=$channelId&key=$key&fields=items%2Fsnippet%2Ftitle,items%2Fsnippet%2Fthumbnails%2Fdefault%2Furl,items%2Fstatistics%2FsubscriberCount";
-        
+
         // Get channel info
         $channel = json_decode(file_get_contents($channelUrl));
-        if (!(array)$channel) {
+        if (!(array) $channel) {
             $res['error'] = "Couldn't get anything with this channel id";
         } else {
-            $res["channel"] = $channel;
+            $res['channel'] = $channel;
         }
     } else {
         $res['error'] = "You haven't specified channel id in url";

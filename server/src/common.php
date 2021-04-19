@@ -1,5 +1,10 @@
 <?php
 
+    function suppressErrors()
+    {
+        error_reporting(0);
+    }
+
     function channelIsSet()
     {
         return isset($_GET['channelId']) && !empty($_GET['channelId']);
