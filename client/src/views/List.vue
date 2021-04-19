@@ -30,7 +30,7 @@
           />
           <div class="ml-4 w-100">
             <h3 class="channel-title text-truncate">{{ channelName }}</h3>
-            <p class="font-size-additional">
+            <p v-if="subscribersCount" class="font-size-additional">
               {{ subscribersCount }} subscribers
             </p>
           </div>
